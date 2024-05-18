@@ -32,8 +32,57 @@ const menu = async () => {
         ],
     });
 
-    
-}
+    switch (action) {
+        case 'View all departments':
+            await viewAllDepartment(pool);
+            break; 
+        case 'View all roles':
+            await viewAllRoles(pool);
+            break; 
+        case 'View all employees':
+            await viewAllEmployees(pool);
+            break;  
+        case 'View employees by manager':
+            await viewEmployeesManager(pool);
+            break;
+        case 'View employees by deparment':
+            await viewEmployeesDepartment(pool);
+            break;
+        case 'Update employee managers':
+            await updateEmployeeManagers(pool);
+            break;
+        case 'Update an employee role':
+            await updateEmployeeRole(pool);
+            break;
+        case 'Add an employee':
+            await addEmployee(pool);
+            break;
+        case 'Add a department':
+            await addDepartment(pool);
+            break;
+        case 'Add a role':
+            await addRole(pool);
+            break;
+        case 'Delete department':
+            await deleteDepartment(pool);
+            break;
+        case 'Delete roles':
+            await deleteRoles(pool);
+            break;
+        case 'Delete employees':
+            await deleteEmployees(pool);
+            break;
+        case 'Exit':
+            pool.end();
+            process.exit();                                   
+    }
+
+    menu();
+
+};
+
+menu();
+
 
 
 
