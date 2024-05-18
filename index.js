@@ -1,3 +1,4 @@
+const inquirer = require('inquirer')
 const { pool } = require('pg')
 
 const pool = new Pool({
@@ -5,21 +6,34 @@ const pool = new Pool({
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
-})
+});
 
 
+const menu = async () => {
+    const { action } = await inquirer.prompt({
+        name: 'action',
+        type: 'list',
+        message: 'What would you like to do?',
+        choices: [
+            'View all departments',
+            'View all roles',
+            'View all employees',
+            'View employees by manager',
+            'View employees by deparment',
+            'Update employee managers',
+            'Update an employee role',
+            'Add an employee',
+            'Add a department',
+            'Add a role',
+            'Delete department',
+            'Delete roles',
+            'Delete employees',
+            'Exit'
+        ],
+    });
 
-
-
-
-
-
-
-
-
-
-
-
+    
+}
 
 
 
