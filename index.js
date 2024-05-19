@@ -20,7 +20,7 @@ const menuQuestions = async () => {
       "View all employees",
       "View employees by manager",
       "View employees by deparment",
-      "Update employee managers",
+      "Update employee manager",
       "Update an employee role",
       "Add an employee",
       "Add a department",
@@ -49,7 +49,7 @@ const menuQuestions = async () => {
       await viewEmployeesDepartment(pool);
       break;
     case "Update employee managers":
-      await updateEmployeeManagers(pool);
+      await updateEmployeeManager(pool);
       break;
     case "Update an employee role":
       await updateEmployeeRole(pool);

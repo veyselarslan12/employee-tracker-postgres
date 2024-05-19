@@ -1,4 +1,4 @@
-INSERT INTO departments (name)
+ INSERT INTO departments (name)
 VALUES ('Software Development'),
        ('IT Support'),
        ('Network Administration'),
