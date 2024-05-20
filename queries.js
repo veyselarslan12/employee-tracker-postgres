@@ -1,13 +1,14 @@
 const inquirer = require('inquirer')
+const pool = require('./pool')
 
-const viewAllDepartments = async (pool) => {
+const viewAllDepartments = async () => {
     const res = await pool.query(`
     SELECT * 
     FROM departments`)
     console.table(res.rows);
 };
 
-const viewAllRoles = async (pool) => {
+const viewAllRoles = async () => {
     const res = await pool.query(`
     SELECT roles.id, roles.title, roles.salary, departments.name 
     AS departments 
@@ -17,7 +18,7 @@ const viewAllRoles = async (pool) => {
     console.table(res.rows);
 };
 
-const viewAllEmployees = async (pool) => {
+const viewAllEmployees = async () => {
     const res = await pool.query(`
     SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name 
     AS department,  roles.salary, employees.manager_id 
@@ -27,7 +28,7 @@ const viewAllEmployees = async (pool) => {
     console.table(res.rows);
 };
 
-const viewEmployeesDepartment = async (pool) => {
+const viewEmployeesDepartment = async () => {
     const res = await pool.query(`
     SELECT employees.id, employees.first_name, employees.last_name, departments.name 
     AS department 
@@ -37,24 +38,22 @@ const viewEmployeesDepartment = async (pool) => {
     console.table(res.rows);
 };
 
-const viewEmployeesManager = async (pool) => {
+const viewEmployeesManager = async () => {
     const res = await pool.query(`
     SELECT employees.id, employees.first_name, employees.last_name, employees.manager_id 
     FROM employees;`)
     console.table(res.rows);
 };
 
-const updateEmployeeManager = async (pool) => {
-    const res = await pool.query(``)
-    console.table(res.rows);
+const updateEmployeeManager = async () => {
+    
 };
 
-const updateEmployeeRole = async (pool) => {
-    const res = await pool.query(``)
-    console.table(res.rows);
+const updateEmployeeRole = async () => {
+    
 };
 
-const addEmployee = async (pool) => {
+const addEmployee = async () => {
     const { first_name, last_name } = await inquirer.prompt([
         {
             name: 'first_name',
@@ -68,20 +67,20 @@ const addEmployee = async (pool) => {
         }
     ])
     await pool.query('INSERT INTO employees (first_name, last_name) VALUES ($1, $2)', [first_name, last_name])
-    console.log(`${first_name} ${last_name} added to employees database.`)
+    console.log(`Added employee ${first_name} ${last_name}.`)
 };
 
-const addDepartment = async (pool) => {
+const addDepartment = async () => {
     const name = await inquirer.prompt({
         name: 'name',
         type: 'input',
         message: 'Enter the name of the department:',
     });
     await pool.query('INSERT INTO departments (name) VALUES ($1)', [name]);
-    console.log(`Added department ${name}`);
+    console.log(`Added department ${name}.`);
 };
 
-const addRole = async (pool) => {
+const addRole = async () => {
     const department = await pool.query('SELECT * FROM departments')
     const { title, salary, department_id } = await inquirer.prompt([
         {
@@ -105,7 +104,7 @@ const addRole = async (pool) => {
     console.log(`Added role ${title}.`);
 };
 
-const deleteDepartment = async (pool) => {
+const deleteDepartment = async () => {
     const department = await pool.query('SELECT * FROM departments')
     const department_id = await inquirer.prompt({
         name: 'department_id',
@@ -117,14 +116,12 @@ const deleteDepartment = async (pool) => {
     console.log(`Department deleted.`);
 };
 
-const deleteRoles = async (pool) => {
-    const res = await pool.query(``)
-    console.table(res.rows);
+const deleteRoles = async () => {
+    
 };
 
-const deleteEmployees = async (pool) => {
-    const res = await pool.query(``)
-    console.table(res.rows);
+const deleteEmployees = async () => {
+    
 };
 
 

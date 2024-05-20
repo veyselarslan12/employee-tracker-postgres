@@ -1,13 +1,7 @@
 require("dotenv").config();
 const inquirer = require("inquirer");
-const { pool } = require("pg");
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-});
+
 
 const menuQuestions = async () => {
   const action = await inquirer.prompt({
@@ -34,46 +28,46 @@ const menuQuestions = async () => {
 
   switch ( action ) {
     case "View all departments":
-      await viewAllDepartments(pool);
+      await viewAllDepartments();
       break;
     case "View all roles":
-      await viewAllRoles(pool);
+      await viewAllRoles();
       break;
     case "View all employees":
-      await viewAllEmployees(pool);
+      await viewAllEmployees();
       break;
     case "View employees by manager":
-      await viewEmployeesManager(pool);
+      await viewEmployeesManager();
       break;
     case "View employees by deparment":
-      await viewEmployeesDepartment(pool);
+      await viewEmployeesDepartment();
       break;
     case "Update employee managers":
-      await updateEmployeeManager(pool);
+      await updateEmployeeManager();
       break;
     case "Update an employee role":
-      await updateEmployeeRole(pool);
+      await updateEmployeeRole();
       break;
     case "Add an employee":
-      await addEmployee(pool);
+      await addEmployee();
       break;
     case "Add a department":
-      await addDepartment(pool);
+      await addDepartment();
       break;
     case "Add a role":
-      await addRole(pool);
+      await addRole();
       break;
     case "Delete department":
-      await deleteDepartment(pool);
+      await deleteDepartment();
       break;
     case "Delete roles":
-      await deleteRoles(pool);
+      await deleteRoles();
       break;
     case "Delete employees":
-      await deleteEmployees(pool);
+      await deleteEmployees();
       break;
     case "Exit":
-      pool.end();
+      // pool.end();
       process.exit();
   }
 
