@@ -1,7 +1,7 @@
 require("dotenv").config();
+const pool = require('./pool')
 const inquirer = require("inquirer");
-
-
+const { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addRole, addEmployee, deleteDepartment, deleteRoles } = require('./queries')
 
 const menuQuestions = async () => {
   const action = await inquirer.prompt({
@@ -67,7 +67,7 @@ const menuQuestions = async () => {
       await deleteEmployees();
       break;
     case "Exit":
-      // pool.end();
+      pool.end();
       process.exit();
   }
 
