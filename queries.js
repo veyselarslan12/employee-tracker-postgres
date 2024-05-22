@@ -181,6 +181,4 @@ const deleteEmployees = async () => {
 
 module.exports = { viewAllDepartments, viewEmployeesManager, viewEmployeesDepartment, viewAllRoles, viewAllEmployees, addDepartment, addRole, updateEmployeeRole, addEmployee, deleteDepartment, deleteRoles, deleteEmployees };
 
-// Office hours questions
 
-// Delete roles is not working
