@@ -26,5 +26,3 @@ CREATE TABLE employees (
     FOREIGN KEY (roles_id) REFERENCES roles(id),
     FOREIGN KEY (manager_id) REFERENCES employees(id)
 );
-
-\i seeds.sql;

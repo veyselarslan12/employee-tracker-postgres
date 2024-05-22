@@ -9,14 +9,14 @@ VALUES ('Software Development'),
        ('Sales and Marketing');
 
 INSERT INTO roles (title, salary, department_id)
-VALUES ('Full Stack Developer', '100000', '1'),
-       ('Desktop Support', '75000', '2'),
-       ('Network Engineer', '82000', '3'),
-       ('Security Engineer', '110000', '4'),
-       ('Data Engineer', '105000', '5'),
-       ('Project Coordinator', '98000', '6'),
-       ('Business Analyst', '102000', '7'),
-       ('Sales Manager', '79000', '8');
+VALUES ('Full Stack Developer', 100000, 1),
+       ('Desktop Support', 75000, 2),
+       ('Network Engineer', 82000, 3),
+       ('Security Engineer', 110000, 4),
+       ('Data Engineer', 105000, 5),
+       ('Project Coordinator', 98000, 6),
+       ('Business Analyst', 102000, 7),
+       ('Sales Manager', 79000, 8);
 
 INSERT INTO employees (first_name, last_name, roles_id, manager_id)   
 VALUES ('Emily', 'Tompson', '3', '1'),

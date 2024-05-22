@@ -1,7 +1,20 @@
 require("dotenv").config();
-const pool = require('./pool')
+const pool = require("./pool");
 const inquirer = require("inquirer");
-const { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addRole, addEmployee, deleteDepartment, deleteRoles } = require('./queries')
+const {
+  viewAllDepartments,
+  viewEmployeesManager,
+  viewEmployeesDepartment,
+  viewAllRoles,
+  viewAllEmployees,
+  addDepartment,
+  addRole,
+  updateEmployeeRole,
+  addEmployee,
+  deleteDepartment,
+  deleteRoles,
+  deleteEmployees,
+} = require("./queries");
 
 const menuQuestions = async () => {
   const action = await inquirer.prompt({
@@ -14,7 +27,6 @@ const menuQuestions = async () => {
       "View all employees",
       "View employees by manager",
       "View employees by deparment",
-      "Update employee manager",
       "Update an employee role",
       "Add an employee",
       "Add a department",
@@ -26,7 +38,7 @@ const menuQuestions = async () => {
     ],
   });
 
-  switch ( action ) {
+  switch (action) {
     case "View all departments":
       await viewAllDepartments();
       break;
@@ -41,9 +53,6 @@ const menuQuestions = async () => {
       break;
     case "View employees by deparment":
       await viewEmployeesDepartment();
-      break;
-    case "Update employee managers":
-      await updateEmployeeManager();
       break;
     case "Update an employee role":
       await updateEmployeeRole();
@@ -84,7 +93,6 @@ menuQuestions();
 // Add a role
 // Add an employee
 // Update an employee role
-// Update employee managers
 // View employees by manager
 // View employees by deparment
 // Delete deparment, roles and employees
