@@ -19,14 +19,14 @@ VALUES ('Full Stack Developer', 100000, 1),
        ('Sales Manager', 79000, 8);
 
 INSERT INTO employees (first_name, last_name, roles_id, manager_id)   
-VALUES ('Emily', 'Tompson', '3', '1'),
-       ('Jhon', 'Martinez', '2', '2'),
-       ('Sarah', 'Patel', '6', '3'),
-       ('Michael', 'Robinson', '4', '4'),
-       ('Jessica', 'Clark', '3', '5'),
-       ('Daniel', 'Lewis', '8', '6'),
-       ('Laura', 'Hall', '3', '7'),
-       ('James', 'Young', '1', '8'),
-       ('Amy', 'Walker', '5', '2'),
-       ('David', 'King', '7', '4');    
+VALUES ('Emily', 'Tompson', 3, 1),
+       ('Jhon', 'Martinez', 2, 2),
+       ('Sarah', 'Patel', 6, 3),
+       ('Michael', 'Robinson', 4, 4),
+       ('Jessica', 'Clark', 3, 5),
+       ('Daniel', 'Lewis', 8, 6),
+       ('Laura', 'Hall', 3, 7),
+       ('James', 'Young', 1, 8),
+       ('Amy', 'Walker', 5, 2),
+       ('David', 'King', 7, 4);    
        

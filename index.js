@@ -38,7 +38,7 @@ const menuQuestions = async () => {
     ],
   });
 
-  switch (action) {
+  switch (action.action) {
     case "View all departments":
       await viewAllDepartments();
       break;

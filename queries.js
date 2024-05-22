@@ -68,7 +68,7 @@ const updateEmployeeRole = async () => {
             name: 'role_id',
             type: 'list',
             message: 'Select the new role for the employee:',
-            choices: roles.map(role => ({name: role.title, value: role_id}))
+            choices: roles.map(role => ({name: role.title, value: role.id}))
         }
     ]);
 
@@ -77,7 +77,9 @@ const updateEmployeeRole = async () => {
 };
 
 const addEmployee = async () => {
-    const { first_name, last_name } = await inquirer.prompt([
+    const roles = await pool.query('SELECT * FROM roles;');
+    
+    const { first_name, last_name, roles_id, manager_id } = await inquirer.prompt([
         {
             name: 'first_name',
             type: 'input',
@@ -87,9 +89,22 @@ const addEmployee = async () => {
             name: 'last_name',
             type: 'input',
             message: 'Enter the employee last name:'
-        }
+        },
+        {
+            name: 'roles_id',
+            type: 'list',
+            message: 'Select the role for this employee:',
+            choices: roles.rows.map(role => ({name: role.title, value: role.id}))
+        },
+        {
+            name: 'manager_id',
+            type: 'list',
+            message: 'Select the manager for this employee:',
+            choices: [{name: 'None', value: null}, 1, 2, 3, 4, 5, 6, 7, 8]
+        },
+        
     ])
-    await pool.query('INSERT INTO employees (first_name, last_name) VALUES ($1, $2);', [first_name, last_name])
+    await pool.query('INSERT INTO employees (first_name, last_name, roles_id, manager_id) VALUES ($1, $2, $3, $4);', [first_name, last_name, roles_id, manager_id])
     console.log(`Added employee ${first_name} ${last_name}.`)
 };
 
@@ -104,7 +119,7 @@ const addDepartment = async () => {
 };
 
 const addRole = async () => {
-    const department = await pool.query('SELECT * FROM departments;')
+    const departments = await pool.query('SELECT * FROM departments;')
     const { title, salary, department_id } = await inquirer.prompt([
         {
             name: 'title',
@@ -120,7 +135,7 @@ const addRole = async () => {
             name: 'department_id',
             type: 'list',
             message: 'Select the department for this role:',
-            choices: department.rows.map(department => ({ name: department.name, value: department_id}))
+            choices: departments.rows.map(department => ({ name: department.name, value: department.id}))
         }
     ])
     await pool.query('INSERT INTO roles (title, salary, department_id) VALUES ($1, $2, $3);', [title, salary, department_id])
@@ -140,12 +155,12 @@ const deleteDepartment = async () => {
 };
 
 const deleteRoles = async () => {
-    const role = await pool.query('SELECT * FROM roles;')
+    const roles = await pool.query('SELECT * FROM roles;')
     const { role_id } = await inquirer.prompt({
         name: 'role_id',
         type: 'list',
         message: 'Select the role to delete:',
-        choices: role.rows.map(roles => ({ name: roles.title, value: roles.id}))
+        choices: roles.rows.map(role => ({ name: role.title, value: role.id}))
     })
     await pool.query('DELETE FROM roles WHERE id = $1', [role_id])
     console.log('Role deleted.')
@@ -165,3 +180,7 @@ const deleteEmployees = async () => {
 
 
 module.exports = { viewAllDepartments, viewEmployeesManager, viewEmployeesDepartment, viewAllRoles, viewAllEmployees, addDepartment, addRole, updateEmployeeRole, addEmployee, deleteDepartment, deleteRoles, deleteEmployees };
+
+// Office hours questions
+
+// Delete roles is not working
