@@ -14,6 +14,7 @@ const {
   deleteDepartment,
   deleteRoles,
   deleteEmployees,
+  departmentBudgets,
 } = require("./queries");
 
 const menuQuestions = async () => {
@@ -34,6 +35,7 @@ const menuQuestions = async () => {
       "Delete department",
       "Delete roles",
       "Delete employees",
+      "View utilized budget for departments",
       "Exit",
     ],
   });
@@ -75,6 +77,9 @@ const menuQuestions = async () => {
     case "Delete employees":
       await deleteEmployees();
       break;
+    case "View utilized budget for departments":
+      await departmentBudgets();
+      break;  
     case "Exit":
       pool.end();
       process.exit();

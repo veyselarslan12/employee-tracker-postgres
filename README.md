@@ -13,9 +13,9 @@
 * Use the arrow keys to navigate and press ``` Enter ``` to select an option.
 
 ## Application Page
-* ![]()
-* ![]()
+* ![question-screen](./images/question-screen.png)
+* ![main-page](./images/main-page.png)
 
 ## Links
-* [Github Repository]()
+* [Github Repository](https://github.com/veyselarslan12/employee-tracker-postgres)
 * [Example Test Video Link]()

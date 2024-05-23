@@ -78,6 +78,7 @@ const updateEmployeeRole = async () => {
 
 const addEmployee = async () => {
     const roles = await pool.query('SELECT * FROM roles;');
+    const employees = await pool.query('SELECT * FROM employees;')
     
     const { first_name, last_name, roles_id, manager_id } = await inquirer.prompt([
         {
@@ -100,7 +101,7 @@ const addEmployee = async () => {
             name: 'manager_id',
             type: 'list',
             message: 'Select the manager for this employee:',
-            choices: [{name: 'None', value: null}, 1, 2, 3, 4, 5, 6, 7, 8]
+            choices: [{ name: 'None', value: null }].concat(employees.rows.map(emp => ({ name: `${emp.first_name} ${emp.last_name}`, value: emp.id })))
         },
         
     ])
@@ -178,7 +179,32 @@ const deleteEmployees = async () => {
     console.log('Employee deleted.')
 };
 
+const departmentBudgets = async () => {
+    const departments = await pool.query('SELECT * FROM departments;')
+    const { department_id } = await inquirer.prompt({
+        name: 'department_id',
+        type: 'list',
+        message: 'Select the department to view its total utilized budget:',
+        choices: departments.rows.map(department => ({ name: department.name, value: department.id }))
+    })
 
-module.exports = { viewAllDepartments, viewEmployeesManager, viewEmployeesDepartment, viewAllRoles, viewAllEmployees, addDepartment, addRole, updateEmployeeRole, addEmployee, deleteDepartment, deleteRoles, deleteEmployees };
+    const res = await pool.query(`
+    SELECT departments.name AS department, SUM(roles.salary) AS total_budget
+    FROM employees
+    JOIN roles ON employees.roles_id = roles.id
+    JOIN departments ON roles.department_id = departments.id
+    WHERE departments.id = $1
+    GROUP BY departments.name;
+    `, [department_id])
+
+    if (res.rows.length === 0 || res.rows[0].total_budget === null) {
+        console.log('No employees found in this department.');
+    } else {
+        console.table(res.rows);
+    }
+
+}
+
+module.exports = { viewAllDepartments, viewEmployeesManager, viewEmployeesDepartment, viewAllRoles, viewAllEmployees, addDepartment, addRole, updateEmployeeRole, addEmployee, deleteDepartment, deleteRoles, deleteEmployees, departmentBudgets };
 
 
