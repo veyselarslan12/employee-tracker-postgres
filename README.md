@@ -18,4 +18,4 @@
 
 ## Links
 * [Github Repository](https://github.com/veyselarslan12/employee-tracker-postgres)
-* [Example Test Video Link]()
+* [Example Test Video Link](https://drive.google.com/file/d/1q1IQt7JwajPLxfv7_oqf1HygvH4aRwSc/view)
